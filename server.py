@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/Users/sahildaswani/opt/anaconda3/envs/fyp-web/lib/python3.11/site-packages')
+# sys.path.append('/Users/sahildaswani/opt/anaconda3/envs/fyp-web/lib/python3.11/site-packages')
 
 import torch
 import torch.nn as nn
@@ -49,22 +49,22 @@ def load_resnet50_model():
 
 resnet50_model = load_resnet50_model()
 
-# Load the VGG16 model
-def load_vgg16_model():
-    model = vgg16(weights=VGG16_Weights.IMAGENET1K_V1)
+# # Load the VGG16 model
+# def load_vgg16_model():
+#     model = vgg16(weights=VGG16_Weights.IMAGENET1K_V1)
 
-    for param in model.parameters():
-        param.requires_grad = False
+#     for param in model.parameters():
+#         param.requires_grad = False
 
-    num_features = model.classifier[-1].in_features
-    model.classifier[-1] = nn.Linear(num_features, len(classes))
-    model = model.to(device)
-    model.load_state_dict(torch.load('vgg16.pth', map_location=device))
-    model.eval()
+#     num_features = model.classifier[-1].in_features
+#     model.classifier[-1] = nn.Linear(num_features, len(classes))
+#     model = model.to(device)
+#     model.load_state_dict(torch.load('vgg16.pth', map_location=device))
+#     model.eval()
 
-    return model
+#     return model
 
-vgg16_model = load_vgg16_model()
+# vgg16_model = load_vgg16_model()
 
 # Load the ViT model
 def load_vit_model():
@@ -113,6 +113,9 @@ def predict(model):
 
     if torch.backends.mps.is_available():
             img_tensor = img_tensor.to(device)
+    elif torch.cuda.is_available():
+        # cuda
+        img_tensor = img_tensor.cuda()
     
     input=Variable(img_tensor)
     output=model(input).cpu()
@@ -126,9 +129,9 @@ def predict(model):
 def predict_resnet50():
     return jsonify({'class': predict(resnet50_model), 'model': 'resnet50'})
 
-@app.route('/predict/vgg16', methods=['POST'])
-def predict_vgg16():
-    return jsonify({'class': predict(vgg16_model), 'model': 'vgg16'})
+# @app.route('/predict/vgg16', methods=['POST'])
+# def predict_vgg16():
+#     return jsonify({'class': predict(vgg16_model), 'model': 'vgg16'})
 
 @app.route('/predict/vit', methods=['POST'])
 def predict_vit():
