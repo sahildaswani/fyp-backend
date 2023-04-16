@@ -1,0 +1,10 @@
+certifi @ file:///Users/ec2-user/ci_py311/certifi_1678321191472/work/certifi
+click @ file:///Users/ec2-user/ci_py311/click_1678318124837/work
+Flask @ file:///Users/ec2-user/ci_py311/flask_1678380788105/work
+Flask-Cors @ file:///tmp/build/80754af9/flask-cors_1609957731919/work
+gunicorn==20.1.0
+itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
+Jinja2 @ file:///Users/ec2-user/ci_py311/jinja2_1678317138271/work
+MarkupSafe @ file:///Users/ec2-user/ci_py311/markupsafe_1678316973889/work
+six @ file:///tmp/build/80754af9/six_1644875935023/work
+Werkzeug @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_fegt3z60s3/croot/werkzeug_1679489762631/work
